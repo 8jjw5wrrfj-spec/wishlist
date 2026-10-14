@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Мій wishlist 🎁</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F2EEFF;--ink:#1E1B4B;--muted:#5B5790;--card:#FFFFFF;--pink:#FF5C8A;--yellow:#FFD84D;--mint:#7FE0C8;--blue:#3D4BD6;--line:#1E1B4B;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15132B;--ink:#F1EEFF;--muted:#A9A5D6;--card:#221F45;--line:#F1EEFF;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15132B;--ink:#F1EEFF;--muted:#A9A5D6;--card:#221F45;--line:#F1EEFF;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+main{max-width:760px;margin:0 auto;padding:40px 18px 64px}
+h1,h2{font-family:"Unbounded","Arial Black",system-ui,sans-serif;line-height:1.15;margin:0}
+h1{font-size:clamp(34px,9vw,60px);font-weight:700}
+h1 span{display:inline-block;background:var(--yellow);color:#1E1B4B;padding:0 .2em;transform:rotate(-2deg);border-radius:10px}
+.lead{color:var(--muted);max-width:46ch;margin:14px 0 36px}
+section{background:var(--card);border:2.5px solid var(--line);border-radius:22px;padding:22px;margin-bottom:28px;box-shadow:6px 6px 0 var(--accent)}
+section:nth-of-type(3n+1){--accent:var(--yellow)}
+section:nth-of-type(3n+2){--accent:var(--pink)}
+section:nth-of-type(3n){--accent:var(--mint)}
+h2{font-size:clamp(19px,5vw,26px);font-weight:500;margin-bottom:6px}
+.hint{color:var(--muted);margin:0 0 18px;font-size:15px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+/* calendar */
+.months{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.m{min-height:112px;border:2px solid var(--line);border-radius:14px;background:var(--bg);padding:10px;text-align:left;display:flex;flex-direction:column;gap:6px}
+.m b{font-family:"Unbounded",sans-serif;font-weight:500;font-size:14px}
+.m i{font-style:normal;font-size:13.5px;display:none}
+.m small{color:var(--muted);font-size:13px}
+.m[aria-pressed="true"]{background:var(--yellow);color:#1E1B4B}
+.m[aria-pressed="true"] i{display:block}
+.m[aria-pressed="true"] small{display:none}
+/* paint */
+.paint{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;width:min(100%,340px)}
+.c{aspect-ratio:1;border:1px solid color-mix(in srgb,var(--ink) 25%,transparent);border-radius:4px;font-size:12px;padding:0;background:transparent;color:var(--muted);display:grid;place-items:center}
+.c.z{border-color:transparent;pointer-events:none}
+.c.on{color:transparent;border-color:transparent}
+.c.bad{animation:sh .25s}
+@keyframes sh{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+.tools{display:flex;flex-direction:column;gap:10px;min-width:150px}
+.pal{display:flex;gap:8px}
+.pal button{width:44px;height:44px;border-radius:50%;border:3px solid var(--line);font-weight:600;color:#1E1B4B}
+.pal button[aria-pressed="true"]{outline:3px solid var(--blue);outline-offset:2px}
+.bar{height:12px;border:2px solid var(--line);border-radius:8px;overflow:hidden}
+.bar div{height:100%;width:0;background:var(--pink);transition:width .2s}
+.done{font-weight:600;min-height:1.5em}
+/* mug */
+.stage{display:grid;place-items:center;background:var(--bg);border-radius:16px;padding:34px 20px 28px;margin-bottom:16px}
+.mug{position:relative;width:190px;height:150px;background:var(--mc);color:var(--mt);border:3px solid var(--line);border-radius:6px 6px 46px 46px;display:grid;place-items:center;padding:14px;text-align:center;font-family:"Unbounded",sans-serif;font-size:14px;line-height:1.3;margin-right:50px}
+.mug::after{content:"";position:absolute;right:-52px;top:26px;width:56px;height:72px;border:14px solid var(--mc);outline:3px solid var(--line);border-radius:0 40px 40px 0;border-left:none;z-index:-1;background:transparent}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chips button{border:2px solid var(--line);background:var(--card);border-radius:99px;padding:6px 14px;font-size:14px}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.sw{display:flex;gap:8px}
+.sw button{width:34px;height:34px;border-radius:50%;border:3px solid var(--line)}
+.sw button[aria-pressed="true"]{outline:3px solid var(--blue);outline-offset:2px}
+footer{text-align:center;color:var(--muted);font-size:14px}
+
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:40px 22px;max-width:760px;margin:0 auto;position:relative}
+.hero .k{color:var(--muted);margin:0 0 10px}
+.hero h1{font-size:clamp(40px,12vw,84px)}
+.age{position:absolute;right:14px;top:6vh;width:clamp(96px,26vw,150px);aspect-ratio:1;border-radius:50%;background:var(--pink);color:#1E1B4B;border:3px solid var(--line);display:grid;place-items:center;font:700 clamp(40px,11vw,68px) "Unbounded",sans-serif;transform:rotate(10deg);box-shadow:5px 5px 0 var(--yellow)}
+.dates{display:grid;gap:10px;margin:26px 0;max-width:440px}
+.dt{border:2.5px solid var(--line);border-radius:16px;background:var(--card);padding:12px 16px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.dt b{font-family:"Unbounded",sans-serif;font-weight:500}
+.dt span{color:var(--muted);font-size:14px}
+.go{align-self:flex-start;background:var(--ink);color:var(--bg);border:none;border-radius:99px;padding:14px 26px;font-weight:600;font-size:17px;text-decoration:none}
+.cd{font-weight:600;margin:0 0 26px}
+.claim{margin-top:18px;padding-top:14px;border-top:2px dashed color-mix(in srgb,var(--ink) 30%,transparent);display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:15px}
+.claim input{font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:99px;padding:8px 14px;min-width:0;flex:1 1 140px}
+.claim button{border:2px solid var(--line);background:var(--yellow);color:#1E1B4B;border-radius:99px;padding:8px 16px;font-weight:600}
+.claim .x{background:transparent;color:var(--ink);font-weight:500}
+
+.grp{font-size:clamp(22px,6vw,32px);margin:44px 0 20px}
+.books{list-style:none;margin:0;padding:0}
+.books li{padding:10px 0;border-bottom:1px solid color-mix(in srgb,var(--ink) 18%,transparent)}
+.books li:last-child{border:none}
+.books b{font-weight:600}
+.books .claim{margin-top:8px;padding-top:0;border:none}
+a{color:var(--blue);font-weight:600}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) a{color:var(--yellow)}}
+:root[data-theme="dark"] a{color:var(--yellow)}
+
+.w{margin:4px 0 14px}
+.pill{font:inherit;font-weight:600;border:2px solid var(--line);background:var(--yellow);color:#1E1B4B;border-radius:99px;padding:8px 18px}
+.out{margin:10px 0 0;color:var(--muted);font-size:15px}
+.big{font-size:32px;min-height:50px;margin-bottom:8px;line-height:1.3;overflow-wrap:anywhere}
+.big.t{font-size:16px}
+.books li.hl{background:color-mix(in srgb,var(--pink) 25%,transparent);border-radius:10px;padding-left:10px}
+.candles{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.candles button{flex:1 1 90px;border:2px solid var(--line);border-radius:14px;background:var(--bg);padding:10px 6px;font-size:13px}
+.candles button span{display:block;font-size:34px;filter:grayscale(1) opacity(.5)}
+.candles button[aria-pressed="true"]{background:#FFE9A8;color:#1E1B4B;box-shadow:0 0 18px #FFD84D}
+.candles button[aria-pressed="true"] span{filter:none}
+.pad{position:relative;height:130px;border:2.5px dashed var(--line);border-radius:14px;margin-bottom:10px;display:grid;place-items:center;color:var(--muted);overflow:hidden;cursor:crosshair;user-select:none}
+.pad span.s{position:absolute;font-size:30px;transform:translate(-50%,-50%) rotate(var(--r))}
+.lap{width:min(100%,240px);height:150px;border:3px solid var(--line);border-radius:12px 12px 18px 18px;background:var(--lc,#3D4BD6);color:var(--lt,#fff);display:grid;place-items:center;font:500 18px "Unbounded",sans-serif;margin-bottom:12px}
+input[type=range]{width:min(100%,300px);accent-color:var(--pink)}
+.thx{background:var(--pink);color:#1E1B4B;text-align:center;padding:34px 22px}
+.thx h2{font-size:clamp(24px,7vw,38px);margin-bottom:12px}
+.thx p{max-width:44ch;margin:0 auto 18px}
+.thx .pill{background:#FFD84D}
+.thx .big{margin:14px 0 0}
+@media (prefers-reduced-motion:reduce){.c.bad{animation:none}}
+</style>
+</head>
+<body>
+<header class="hero" id="top">
+<div class="age" aria-label="20 років">20</div>
+<p class="k">Запрошення і список побажань</p>
+<h1>Ярославі<br>виповнюється <span>двадцять</span></h1>
+<p class="lead" style="margin-bottom:0">Друзі постійно питають, що б я хотіла на день народження. І ось цей день настав: я нарешті сформувала свої бажанки. Заходь, тут затишно, а далі все просто: обирай і позначай.</p>
+<div class="dates">
+<div class="dt"><b>27 жовтня</b><span>мій справжній день народження</span></div>
+<div class="dt"><b>7 листопада</b><span>святкуємо разом</span></div>
+</div>
+<p class="cd" id="cd"></p>
+<a class="go" href="#list">Відкрити список подарунків</a>
+</header>
+<main id="list">
+<h1 style="font-size:clamp(30px,8vw,48px)">Мій <span>wishlist</span></h1>
+<p class="lead">Усе, що я б хотіла отримати. Обери подарунок і впиши своє ім'я під ним, щоб ніхто не купив те саме.</p>
+<h2 class="grp">Для душі</h2>
+<section>
+<h2>🔮 Календарик на рік з передбаченнями</h2>
+<p class="hint">Чекаю на 2027 рік із пророцтвами на кожен місяць. Торкнись плитки, щоб побачити зразок.</p>
+<div class="months" id="months"></div>
+<div class="claim" data-k="calendar"></div>
+</section>
+<section>
+<h2>💎 Алмазна мозаїка або картина по номерах з Gifty</h2>
+<p class="hint">Вечори з чаєм і маленькими кольоровими кружечками. Потренуймося на сердечку: обери колір і торкайся клітинок з тим самим номером.</p>
+<div class="paint">
+<div class="grid" id="grid"></div>
+<div class="tools">
+<div class="pal" id="pal"></div>
+<div class="bar"><div id="fill"></div></div>
+<div class="done" id="done" aria-live="polite"></div>
+</div>
+</div>
+<div class="claim" data-k="paint"></div>
+</section>
+<section>
+<h2>💐 Квіти</h2>
+<p class="hint">Живі, красиві й обов'язково такі, щоб вдома їх було приємно роздивлятися.</p>
+<div class="w"><div class="big" id="vase" aria-live="polite">Букет порожній</div><div class="chips" id="flc"></div><button class="pill" id="flr">Почати знову</button></div>
+<div class="claim" data-k="flowers"></div>
+</section>
+<section>
+<h2>📚 Книги</h2>
+<p class="hint">Мій book wish list. Детективи та трилери, обери одну (або кілька) і впиши ім'я під потрібною.</p>
+<div class="w"><button class="pill" id="rb">Яку читати першою?</button> <span id="rbt" aria-live="polite"></span></div>
+<ul class="books"><li><b>«Я знаю секрет»</b>, Тесс Геррітсен<div class="claim" data-k="book1"></div></li><li><b>«Острів проклятих»</b>, Денніс Лігейн<div class="claim" data-k="book2"></div></li><li><b>«Приховані малюнки»</b>, Джейсон Рекулак<div class="claim" data-k="book3"></div></li><li><b>«Ні жива, ні мертва»</b>, Голлі Джексон<div class="claim" data-k="book4"></div></li><li><b>«Сухі кістки»</b>, Віталій Дуленко<div class="claim" data-k="book5"></div></li><li><b>«Записано на кістках. Друге розслідування»</b>, Саймон Бекет<div class="claim" data-k="book6"></div></li></ul>
+</section>
+<h2 class="grp">Для затишку</h2>
+<section>
+<h2>🕯️ Свічки з цікавим дизайном</h2>
+<p class="hint">Щоб наш дім завжди був затишним. А якщо ще й з цікавим дизайном, то взагалі ідеально.</p>
+<div class="candles" id="cdl"></div>
+<div class="claim" data-k="candles"></div>
+</section>
+<section>
+<h2>✨ Наліпки</h2>
+<p class="hint">Моє дивне хобі: збирати наліпки, але не клеїти в альбом, як у дитинстві. Тож цікаві дизайнерські наліпки будуть дуже до речі.</p>
+<div class="w"><div class="pad" id="pad" role="button" tabindex="0">Тапни, щоб клеїти наліпки</div><button class="pill" id="padc">Здерти все</button></div>
+<div class="claim" data-k="stickers"></div>
+</section>
+<section>
+<h2>🌙 Піжама</h2>
+<p class="hint">Саме кофтинка і штани.</p>
+<p class="hint">Приклад такої піжами: <a href="https://www.instagram.com/p/Dc6op3CDP5O/?img_index=4&amp;mdxt=ZnM2eHNid255dHI0" target="_blank" rel="noopener noreferrer">ось тут, в Instagram</a>.</p>
+<div class="w"><div class="chips" id="pjt"></div><div class="chips" id="pjb"></div><p class="out" id="pjo">Склади образ для ідеальної ночі.</p></div>
+<div class="claim" data-k="pajama"></div>
+</section>
+<h2 class="grp">Для життя</h2>
+<section>
+<h2>🧴 Догляд за тілом або парфумерія Sol de Janeiro</h2>
+<p class="hint">Місти, скраби, креми, а ще парфумерія цього бренду.</p>
+<div class="w"><div class="chips" id="cr"></div><p class="out" id="cro">Обери настрій, і я підберу формат.</p></div>
+<div class="claim" data-k="care"></div>
+</section>
+<section>
+<h2>💻 Чохол на ноутбук</h2>
+<p class="hint">Мій MacBook Air M4, 13,6 дюйма. Хочу, щоб він був одягнений як слід.</p>
+<div class="w"><div class="lap" id="lap">13,6″</div><div class="sw" id="lsw"></div></div>
+<div class="claim" data-k="case"></div>
+</section>
+<section>
+<h2>💆 Сертифікат на масаж</h2>
+<p class="hint">Офісні працівники дуже страждають, тож це не розкіш, а порятунок.</p>
+<div class="w"><label for="back">Наскільки болить спина? <b id="bv">5</b>/10</label><br><input type="range" id="back" min="0" max="10" value="5"><p class="out" id="bo"></p></div>
+<div class="claim" data-k="massage"></div>
+</section>
+<section>
+<h2>🧸 Іграшки «Дивні дива» серії Funko Pop</h2>
+<p class="hint">Фігурки з «Дивних див». Збирати можна по одній.</p>
+<div class="w"><div class="chips" id="fk"></div><div class="big" id="shelf" aria-live="polite">Полиця порожня</div></div>
+<div class="claim" data-k="funko"></div>
+</section>
+<section>
+<h2>💸 Гроші</h2>
+<p class="hint">Універсальний подарунок, якщо ідеї закінчилися. Позначати нічого не треба, просто подаруй від душі.</p>
+<div class="w"><button class="pill" id="pig">🐷 Покласти монетку</button> <b id="pgc">0</b><p class="out" id="pgo"></p></div>
+</section>
+<section class="thx">
+<h2>Дякую, що ти є 💖</h2>
+<p>Те, що ти дійшов(-ла) до кінця списку, вже найкращий подарунок. А все інше просто приємні бонуси. Побачимось 7 листопада, буде смачно, весело і затишно!</p>
+<button class="pill" id="hug">Обійняти у відповідь 🤗</button>
+<div class="big" id="hearts" aria-live="polite"></div>
+</section>
+</main>
+<script>
+const P=["Ти скажеш «з понеділка» — і цього разу вийде.","Знайдеш гроші в кишені старої куртки.","Хтось скаже, що ти чудово виглядаєш. Повір.","Відпустка вже в планах, хоча б у голові.","Кава буде саме такою, як треба.","Добра новина прилетить у месенджер.","Ідеальна погода рівно у твій вихідний.","Поїздка, про яку розповідатимеш усім.","Нове хобі, яке ти таки не кинеш.","Приємний сюрприз у пошті та в житті.","Плед, серіал і жодної провини.","Майже всі бажання зі списку здійсняться."];
+const M=["Січень","Лютий","Березень","Квітень","Травень","Червень","Липень","Серпень","Вересень","Жовтень","Листопад","Грудень"];
+const mw=document.getElementById("months");
+M.forEach((n,i)=>{const b=document.createElement("button");b.className="m";b.setAttribute("aria-pressed","false");b.innerHTML=`<b>${n}</b><small>Що буде?</small><i>${P[i]}</i>`;b.onclick=()=>b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="false");mw.append(b)});
+
+const pat=["0110000110","1321001221","1222112221","1222222221","0122222210","0012222100","0001221000","0000110000"];
+const col={1:"#D63F77",2:"#FF8FB1",3:"#FFD84D"};
+let sel=1,total=0,got=0;
+const grid=document.getElementById("grid"),pal=document.getElementById("pal"),fill=document.getElementById("fill"),done=document.getElementById("done");
+pat.forEach(r=>[...r].forEach(ch=>{const c=document.createElement("button");const v=+ch;c.className="c"+(v?"":" z");if(v){total++;c.textContent=v;c.setAttribute("aria-label","Клітинка "+v);
+c.onclick=()=>{if(c.classList.contains("on"))return;if(v===sel){c.classList.add("on");c.style.background=col[v];c.style.borderRadius="50%";got++;fill.style.width=got/total*100+"%";done.textContent=got===total?"Готово! Ось так я буду щасливий(-а) 💖":""}else{c.classList.remove("bad");void c.offsetWidth;c.classList.add("bad")}}}grid.append(c)}));
+[1,2,3].forEach(n=>{const b=document.createElement("button");b.textContent=n;b.style.background=col[n];b.setAttribute("aria-pressed",n===sel);b.onclick=()=>{sel=n;[...pal.children].forEach(x=>x.setAttribute("aria-pressed",x===b))};pal.append(b)});
+
+
+
+(function(){const d=Math.ceil((new Date(2026,10,7)-new Date(new Date().toDateString()))/864e5),e=document.getElementById("cd");
+e.textContent=d>0?"До свята залишилось днів: "+d:d===0?"Свято сьогодні!":"Свято вже було. Дякую всім 🎉"})();
+let db=null,uid=null,owner=false,claims={};
+function render(){document.querySelectorAll(".claim").forEach(box=>{const k=box.dataset.k,c=claims[k];box.textContent="";
+if(!db){const p=document.createElement("span");p.textContent="Щоб позначити подарунок, відкрий сторінку зі своїм акаунтом Claude.";box.append(p);return}
+if(c){const p=document.createElement("span");p.textContent=owner?"🎁 Цей подарунок уже хтось обрав. Сюрприз!":"✅ Подарує: "+c.name;box.append(p);
+if(!owner&&uid&&c.uid===uid){const b=document.createElement("button");b.className="x";b.textContent="Скасувати";b.onclick=()=>db.doc("claims/"+k).delete().catch(()=>{});box.append(b)}return}
+const i=document.createElement("input");i.placeholder="Твоє ім'я";i.maxLength=30;i.setAttribute("aria-label","Твоє ім'я");
+const b=document.createElement("button");b.textContent="Беру на себе";
+b.onclick=()=>{const n=i.value.trim();if(!n){i.focus();return}db.doc("claims/"+k).set({name:n,uid:uid||""}).catch(()=>{i.placeholder="Не вийшло, спробуй ще"})};
+box.append(i,b)})}
+(async()=>{try{const u=await claude.use("user");db=await claude.use("db");owner=u?.isOwner?.()??false;uid=u?.id?await u.id():null;
+if(db)db.collection("claims").onSnapshot(s=>{claims={};s.docs.forEach(x=>claims[x.id]=x.data());render()},()=>{})}catch(e){}render()})();
+
+const $=id=>document.getElementById(id);
+function chips(id,o,fn,tg){const bx=$(id);o.forEach((t,i)=>{const b=document.createElement("button");b.textContent=t;b.setAttribute("aria-pressed","false");b.onclick=()=>{if(tg)b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="false");else[...bx.children].forEach(x=>x.setAttribute("aria-pressed",x===b));fn(i,b,bx)};bx.append(b)})}
+let bq=[];const FL=["🌷","🌸","🌻","🌹","🪻","🌼"];
+chips("flc",FL,i=>{if(bq.length<9)bq.push(FL[i]);$("vase").textContent=bq.join("")+(bq.length>=7?" 😍":"")});
+$("flr").onclick=()=>{bq=[];$("vase").textContent="Букет порожній"};
+$("rb").onclick=()=>{const l=[...document.querySelectorAll(".books li")];l.forEach(x=>x.classList.remove("hl"));const p=l[Math.floor(Math.random()*l.length)];p.classList.add("hl");$("rbt").textContent="Починай із: "+p.querySelector("b").textContent};
+["Ваніль і сніг","Кава й кориця","Нічний сад"].forEach(n=>{const b=document.createElement("button");b.setAttribute("aria-pressed","false");b.innerHTML="<span>🕯️</span>"+n;b.onclick=()=>b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="false");$("cdl").append(b)});
+const SK=["⭐","🍓","👽","🐸","🌈","🍄","💿","🧿"],pad=$("pad");
+pad.onclick=e=>{const r=pad.getBoundingClientRect(),p=document.createElement("span");p.className="s";p.textContent=SK[Math.floor(Math.random()*SK.length)];p.style.left=(e.clientX-r.left)+"px";p.style.top=(e.clientY-r.top)+"px";p.style.setProperty("--r",(Math.random()*60-30)+"deg");pad.append(p)};
+pad.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pad.onclick({clientX:pad.getBoundingClientRect().left+Math.random()*pad.clientWidth,clientY:pad.getBoundingClientRect().top+Math.random()*pad.clientHeight})}};
+$("padc").onclick=()=>pad.querySelectorAll(".s").forEach(x=>x.remove());
+const PT=["у смужку","із зірками","з ведмедиками"],PB=["у клітинку","з хмаринками","з котиками"];let pt=null,pb=null;
+const pj=()=>{if(pt!==null&&pb!==null)$("pjo").textContent="Образ: кофтинка "+PT[pt]+" і штани "+PB[pb]+". Рівень затишку: 100%."};
+chips("pjt",PT.map(x=>"Кофтинка "+x),i=>{pt=i;pj()});chips("pjb",PB.map(x=>"Штани "+x),i=>{pb=i;pj()});
+const CR=["Хочу літо посеред зими","Хочу відпочити","Хочу пахнути так, щоб озирались"],CO=["Тобі підійде спрей-міст для тіла: аромат літа з собою.","Скраб і густий крем, ванна в комплекті.","Парфуми, які тримаються цілий день."];
+chips("cr",CR,i=>$("cro").textContent=CO[i]);
+[["#3D4BD6","#fff"],["#FF5C8A","#1E1B4B"],["#7FE0C8","#1E1B4B"],["#1E1B4B","#fff"]].forEach((c,i)=>{const b=document.createElement("button");b.style.background=c[0];b.setAttribute("aria-label","Колір "+(i+1));b.setAttribute("aria-pressed",i===0);b.onclick=()=>{$("lap").style.setProperty("--lc",c[0]);$("lap").style.setProperty("--lt",c[1]);[...$("lsw").children].forEach(x=>x.setAttribute("aria-pressed",x===b))};$("lsw").append(b)});
+const BO=["Спина щаслива. Масаж для профілактики!","Тримається, але вже натякає.","Легке хрускотіння. Масаж не завадить.","Офісний стан класичний.","Пора розім'ятися.","Так собі. Масаж став би в нагоді.","Спина вже пише скаргу.","Терміново потрібні руки майстра!","Спина просить пощади.","Критично. Записуй мене!","Масаж потрібен ще вчора!"];
+const bk=$("back"),bu=()=>{$("bv").textContent=bk.value;$("bo").textContent=BO[bk.value]};bk.oninput=bu;bu();
+const FG=["Одинадцята","Майк","Дастін","Люкас","Макс","Вілл"];let fs=new Set();
+chips("fk",FG,i=>{fs.has(i)?fs.delete(i):fs.add(i);const sh=$("shelf");sh.className="big"+(fs.size?" t":"");sh.textContent=fs.size?[...fs].sort().map(k=>FG[k]).join(" · ")+" ("+fs.size+" із 6)":"Полиця порожня"},true);
+let pc=0;$("pig").onclick=()=>{pc++;$("pgc").textContent=pc;$("pgo").textContent=pc>=100?"Ти офіційно найкращий друг у світі 🏆":pc>=60?"Майже вистачає на масаж 💆":pc>=30?"Це вже на книжку 📚":pc>=10?"Це вже на каву ☕":""};
+let hg=0;$("hug").onclick=()=>{if(hg<24){hg++;$("hearts").textContent+="💖"}};
+</script>
+</body>
+</html>
